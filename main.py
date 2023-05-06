@@ -18,8 +18,8 @@ x_train = x_train.reshape(x_train.shape[0], 28, 28, 1).astype('float32')/255
 x_test = x_test.reshape(x_test.shape[0], 28, 28, 1).astype('float32')/255
 input_shape = (28, 28, 1)
 
-y_train = keras.utils.to_categorical(y_train, num_classes)
-y_test = keras.utils.to_categorical(y_test, num_classes)
+y_train = keras.utils.np_utils.to_categorical(y_train, num_classes)
+y_test = keras.utils.np_utils.to_categorical(y_test, num_classes)
 
 print("Размерность x_train:", x_train.shape[0])
 
