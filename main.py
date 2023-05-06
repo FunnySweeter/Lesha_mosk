@@ -24,7 +24,7 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 print("Размерность x_train:", x_train.shape[0])
 
 batch_size = 100
-epochs = 15
+epochs = 1
 
 model = Sequential(
     [
@@ -35,9 +35,10 @@ model = Sequential(
         Dropout(0.25),
         Flatten(),
 
-        Dense(512, "softmax"),
+        Dense(512, "relu"),
         Dropout(0.25),
-        Dense(256, "softmax"),
+        Dense(256, "relu"),
+        Dropout(0.25),
         Dense(num_classes, "softmax")
     ]
 )
