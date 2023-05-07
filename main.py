@@ -1,6 +1,7 @@
 from tensorflow import keras
 from keras.datasets import mnist
 from keras.models import Sequential
+from keras.models import load_model
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 from keras.utils import np_utils
@@ -10,6 +11,8 @@ import numpy
 
 import tensorflow
 from tensorflow import random
+
+model = load_model("mnist.h5")
 
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
@@ -26,26 +29,26 @@ print("Размерность x_train:", x_train.shape[0])
 batch_size = 100
 epochs = 1
 
-model = Sequential(
-    [
-        Conv2D(32, (3, 3), activation="relu", input_shape=input_shape),
-        Conv2D(64, (3, 3), activation="relu"),
-        MaxPooling2D(pool_size=(2, 2)),
-
-        Dropout(0.25),
-        Flatten(),
-
-        Dense(512, "relu"),
-        Dropout(0.25),
-        Dense(256, "relu"),
-        Dropout(0.25),
-        Dense(num_classes, "softmax")
-    ]
-)
-
-model.compile(loss=keras.losses.categorical_crossentropy, optimizer=keras.optimizers.Adadelta(), metrics=["accuracy"])
-
-model.summary()
+#model = Sequential(
+#    [
+#        Conv2D(32, (3, 3), activation="relu", input_shape=input_shape),
+#        Conv2D(64, (3, 3), activation="relu"),
+#        MaxPooling2D(pool_size=(2, 2)),
+#
+#        Dropout(0.25),
+#        Flatten(),
+#
+#        Dense(512, "relu"),
+#        Dropout(0.25),
+#        Dense(256, "relu"),
+#        Dropout(0.25),
+#        Dense(num_classes, "softmax")
+#    ]
+#)
+#
+#model.compile(loss=keras.losses.categorical_crossentropy, optimizer=keras.optimizers.Adadelta(), metrics=["accuracy"])
+#
+#model.summary()
 
 hist = model.fit(x_train, y_train, batch_size = batch_size, epochs = epochs, verbose = 1, validation_data = (x_test, y_test))
 model.save("mnist.h5")
